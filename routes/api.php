@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TimeController;
 use App\Http\Controllers\TurnController;
