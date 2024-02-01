@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateTimeRequest;
 use App\Http\Resources\ShowTimeForAdmin;
 use App\Models\Time;
 use Illuminate\Http\Request;
@@ -24,5 +25,14 @@ class TimeController extends Controller
         $time = Time::query()->where('doctor_id', $doctor_id)
             ->orWhere('confirmation',$confirmation)->get();
         return ShowTimeForAdmin::collection($time);
+    }
+
+    public function updateTime(Time $time,UpdateTimeRequest $request)
+    {
+        $time->update($request->validated());
+        return response()->json([
+            'message' => 'This Time Is Confirmed',
+            'time' => $time
+        ]);
     }
 }

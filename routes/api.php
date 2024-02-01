@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::match(['put','patch'],'section/update/{section}',[SectionController::class,'updateSection']);
 
         Route::get('time/admin',[TimeController::class,'indexTime']);
+        Route::match(['put','patch'],'time/update/{time}',[TimeController::class,'updateTime']);
 
     });
 });
