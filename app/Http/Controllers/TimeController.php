@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTimeRequest;
 use App\Http\Requests\UpdateTimeRequest;
 use App\Http\Resources\ShowTimeForAdmin;
 use App\Http\Resources\ShowTimeResource;
@@ -65,5 +66,17 @@ class TimeController extends Controller
             ->with(["users", "sections"])->get();
 //        dd(DB::getQueryLog());
         return ShowTimeResource::collection($time);
+    }
+
+    public function createTime(CreateTimeRequest $request)
+    {
+        $doctor_id = auth()->user()->id;
+        $section_id = auth()->user()->section_id;
+        $data = $request->validated();
+        $data = array_merge($data,['doctor_id' => $doctor_id,'section_id' => $section_id]);
+        $time = Time::query()->create($data);
+        return response()->json([
+            'message' => 'time was created'
+        ]);
     }
 }

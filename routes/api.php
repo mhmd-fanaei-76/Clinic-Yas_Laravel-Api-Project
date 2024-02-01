@@ -39,6 +39,9 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::delete('time/delete/{time}',[TimeController::class,'deleteTime']);
 
     });
+    Route::group(['middleware' => [RoleMiddleware::using('doctor')]], function () {
+        Route::post('time/create',[TimeController::class,'createTime']);
+    });
 });
 
 
