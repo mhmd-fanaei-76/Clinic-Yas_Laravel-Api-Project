@@ -38,4 +38,12 @@ class TurnController extends Controller
             'turn' => $turn
         ]);
     }
+
+    public function deleteTurn()
+    {
+        RemoveOldTurns::dispatch();
+        return response()->json([
+            'message' => 'Turns Less One Month Is Deleted'
+        ]);
+    }
 }
