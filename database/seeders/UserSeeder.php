@@ -19,6 +19,6 @@ class UserSeeder extends Seeder
             'password' => '123',
             'section_id' => null
         ]);
-        $user->assignRole(['admin','baseAdmin']);
+        $user->assignRole('admin');
     }
 }

@@ -16,6 +16,5 @@ class RoleSeeder extends Seeder
         Role::query()->create(['name' => 'admin']);
         Role::query()->create(['name' => 'doctor']);
         Role::query()->create(['name' => 'patient']);
-        Role::query()->create(['name' => 'baseAdmin']);
     }
 }
