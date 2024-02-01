@@ -47,4 +47,12 @@ class UserController extends Controller
             'User' => $user
         ]);
     }
+
+    public function indexAdmin()
+    {
+        $admin = User::role('admin')->get();
+        return response()->json([
+            'User' => $admin
+        ]);
+    }
 }
