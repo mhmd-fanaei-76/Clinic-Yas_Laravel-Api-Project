@@ -44,6 +44,7 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::post('time/create',[TimeController::class,'createTime']);
 
         Route::get('turn/get',[TurnController::class,'indexTurn']);
+        Route::match(['put','patch'],'turn/update/{turn}',[TurnController::class,'updateTurn']);
 
     });
 });

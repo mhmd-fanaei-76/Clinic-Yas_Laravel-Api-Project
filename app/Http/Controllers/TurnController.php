@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateTurnRequest;
 use App\Http\Resources\ShowTurnsResource;
 use App\Models\Time;
 use App\Models\Turn;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TurnController extends Controller
@@ -22,5 +24,15 @@ class TurnController extends Controller
         $times = Time::query()->where('doctor_id', $doctor_id)->get()->pluck('id');
         $turn = Turn::query()->whereIn('time_id', $times)->where('confirmation',$confirmation)->get();
         return ShowTurnsResource::collection($turn);
+    }
+
+    public function updateTurn(Turn $turn,UpdateTurnRequest $request)
+    {
+        $turn->update($request->validated());
+
+        return response()->json([
+            'message' => 'This Turn Is Confirmed',
+            'turn' => $turn
+        ]);
     }
 }
