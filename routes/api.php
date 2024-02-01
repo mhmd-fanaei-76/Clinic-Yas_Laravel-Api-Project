@@ -45,3 +45,4 @@ Route::middleware('auth:sanctum')->group(function (){
 
 Route::post('user/register',[AuthController::class,'register']);
 Route::post('user/login',[AuthController::class,'login']);
+Route::get('time',[TimeController::class,'index']);
