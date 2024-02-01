@@ -52,6 +52,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::group(['middleware' => [RoleMiddleware::using('patient')]], function () {
         Route::post('turn/create',[TurnController::class,'createTurn']);
         Route::get('turn/myTurn',[TurnController::class,'indexMyTurn']);
+        Route::get('notification/getMyNotify',[NotificationController::class,'indexNotification']);
 
     });
 });
