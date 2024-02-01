@@ -23,6 +23,8 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::group(['middleware' => [RoleMiddleware::using('admin')]], function () {
         Route::post('user/create',[UserController::class,'createUser']);
         Route::delete('user/delete/{user}',[UserController::class,'deleteUser']);
+        Route::match(['put','patch'],'user/update/{user}',[UserController::class,'updateUser']);
+
     });
 });
 

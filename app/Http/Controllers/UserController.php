@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -17,14 +18,14 @@ class UserController extends Controller
             $doctor->assignRole('doctor');
             return response()->json([
                 'message' => 'Doctor Created',
-                'Doctor' => $doctor,
+                'User' => $doctor,
             ]);
         }else {
             $admin = User::query()->create($data);
             $admin->assignRole('admin');
             return response()->json([
                 'message' => 'Admin Created',
-                'Admin' => $admin,
+                'User' => $admin,
             ]);
         }
     }
@@ -34,6 +35,16 @@ class UserController extends Controller
         $user->delete();
         return response()->json([
             'message' => 'User Deleted'
+        ]);
+    }
+
+    public function updateUser(User $user,UpdateUserRequest $request)
+    {
+        $data = $request->validated();
+        $user->update($data);
+        return response()->json([
+            'message' => 'User Updated',
+            'User' => $user
         ]);
     }
 }
