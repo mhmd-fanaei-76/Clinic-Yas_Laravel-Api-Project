@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function (){
 
         Route::get('time/admin',[TimeController::class,'indexTime']);
         Route::match(['put','patch'],'time/update/{time}',[TimeController::class,'updateTime']);
+        Route::delete('time/delete/{time}',[TimeController::class,'deleteTime']);
 
     });
 });

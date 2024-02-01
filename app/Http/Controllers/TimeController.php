@@ -35,4 +35,12 @@ class TimeController extends Controller
             'time' => $time
         ]);
     }
+
+    public function deleteTime(Time $time)
+    {
+        $time->delete();
+        return response()->json([
+            'message' => 'Time Deleted'
+        ]);
+    }
 }
