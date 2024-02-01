@@ -1,3 +1,23 @@
+
+# Clinic Yas
+
+This project is an example of an online appointment project for patients whose departments and doctors are defined by the administrator and working hours are defined by the doctor, and the patient can make an appointment by viewing the required departments and doctor on the required day and wait for the message. Confirmation of his appointment by the doctor will reach him.
+
+
+Project implementation steps :
+
+1- import postman collection in postman
+
+2- write command php artisan serve in terminal
+
+3- write command php artisan migrate in terminal
+
+4- write command php artisan db:seed in terminal
+
+5- end -> open post man and test project clicnic_yas
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
