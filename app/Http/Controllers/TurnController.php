@@ -7,6 +7,7 @@ use App\Http\Resources\ShowTurnsResource;
 use App\Models\Time;
 use App\Models\Turn;
 use App\Models\User;
+use App\Notifications\TurnConfirmedNotification;
 use Illuminate\Http\Request;
 
 class TurnController extends Controller
@@ -29,7 +30,9 @@ class TurnController extends Controller
     public function updateTurn(Turn $turn,UpdateTurnRequest $request)
     {
         $turn->update($request->validated());
-
+        // send notification
+        User::query()->find($turn->patient_id)->notify(new TurnConfirmedNotification($turn));
+        // end send notification
         return response()->json([
             'message' => 'This Turn Is Confirmed',
             'turn' => $turn
