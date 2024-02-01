@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::get('user/admin',[UserController::class,'indexAdmin']);
         Route::get('user/doctor',[UserController::class,'indexDoctor']);
 
+        Route::post('section/create',[SectionController::class,'createSection']);
 
     });
 });
