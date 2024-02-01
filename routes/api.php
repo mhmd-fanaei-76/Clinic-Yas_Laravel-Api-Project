@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Middleware\RoleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function (){
     Route::delete('user/logout',[AuthController::class,'logout']);
 
-
+    Route::group(['middleware' => [RoleMiddleware::using('admin')]], function () {
+        Route::post('user/create',[UserController::class,'createUser']);
+    });
 });
+
+
+
 Route::post('user/register',[AuthController::class,'register']);
 Route::post('user/login',[AuthController::class,'login']);
