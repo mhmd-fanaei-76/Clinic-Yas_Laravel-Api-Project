@@ -40,13 +40,17 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::delete('time/delete/{time}',[TimeController::class,'deleteTime']);
 
     });
+
     Route::group(['middleware' => [RoleMiddleware::using('doctor')]], function () {
         Route::post('time/create',[TimeController::class,'createTime']);
 
         Route::get('turn/get',[TurnController::class,'indexTurn']);
         Route::match(['put','patch'],'turn/update/{turn}',[TurnController::class,'updateTurn']);
         Route::delete('turn/delete',[TurnController::class,'deleteTurn']);
+    });
 
+    Route::group(['middleware' => [RoleMiddleware::using('patient')]], function () {
+        Route::post('turn/create',[TurnController::class,'createTurn']);
     });
 });
 

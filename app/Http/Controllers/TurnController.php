@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TurnCreateRequest;
 use App\Http\Requests\UpdateTurnRequest;
 use App\Http\Resources\ShowTurnsResource;
+use App\Jobs\RemoveOldTurns;
 use App\Models\Time;
 use App\Models\Turn;
 use App\Models\User;
@@ -44,6 +46,24 @@ class TurnController extends Controller
         RemoveOldTurns::dispatch();
         return response()->json([
             'message' => 'Turns Less One Month Is Deleted'
+        ]);
+    }
+
+    public function createTurn(TurnCreateRequest $request)
+    {
+        if(!auth()->user()->can('turn.create')){
+            return response()->json([
+                'message' => 'Access Denied'
+            ]);
+        }
+        $patient_id = auth()->user()->id;
+        $date = date('Y-m-d H:i:s');
+        $data = $request->validated();
+        $data = array_merge($data, ['patient_id' => $patient_id, 'turns_date' => $date]);
+//        dd($data);
+        $turn = Turn::query()->with(["times", "users"])->create($data);
+        return response()->json([
+            'message' => 'Your Turn Is Pending To Confirmation'
         ]);
     }
 }
