@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::delete('user/delete/{user}',[UserController::class,'deleteUser']);
         Route::match(['put','patch'],'user/update/{user}',[UserController::class,'updateUser']);
         Route::get('user/admin',[UserController::class,'indexAdmin']);
+        Route::get('user/doctor',[UserController::class,'indexDoctor']);
 
 
     });

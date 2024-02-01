@@ -55,4 +55,12 @@ class UserController extends Controller
             'User' => $admin
         ]);
     }
+
+    public function indexDoctor()
+    {
+        $doctor = User::role('doctor')->get();
+        return response()->json([
+            'User' => $doctor
+        ]);
+    }
 }
