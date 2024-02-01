@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\TimeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::get('section/get',[SectionController::class,'indexSection']);
         Route::delete('section/delete/{section}',[SectionController::class,'deleteSection']);
         Route::match(['put','patch'],'section/update/{section}',[SectionController::class,'updateSection']);
+
+        Route::get('time/admin',[TimeController::class,'indexTime']);
 
     });
 });
