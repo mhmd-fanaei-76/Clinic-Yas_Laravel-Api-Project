@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::post('section/create',[SectionController::class,'createSection']);
         Route::get('section/get',[SectionController::class,'indexSection']);
         Route::delete('section/delete/{section}',[SectionController::class,'deleteSection']);
+        Route::match(['put','patch'],'section/update/{section}',[SectionController::class,'updateSection']);
 
     });
 });

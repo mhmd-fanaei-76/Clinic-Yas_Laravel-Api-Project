@@ -33,4 +33,16 @@ class SectionController extends Controller
             'message' => 'Section Deleted'
         ]);
     }
+
+    public function updateSection(Section $section,Request $request)
+    {
+        $data = $request->validate([
+            'section_name' => 'required'
+        ]);
+        $section->update($data);
+        return response()->json([
+            'message' => 'Section Updated',
+            'Section' => $section
+        ]);
+    }
 }
