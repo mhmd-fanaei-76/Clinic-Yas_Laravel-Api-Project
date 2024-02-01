@@ -25,4 +25,12 @@ class SectionController extends Controller
             'section' => $section
         ]);
     }
+
+    public function deleteSection(Section $section)
+    {
+        $section->delete();
+        return response()->json([
+            'message' => 'Section Deleted'
+        ]);
+    }
 }
