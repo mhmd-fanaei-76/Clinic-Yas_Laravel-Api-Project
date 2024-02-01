@@ -17,4 +17,12 @@ class SectionController extends Controller
             'message' => 'section was created'
         ]);
     }
+
+    public function indexSection()
+    {
+        $section = Section::query()->get();
+        return response()->json([
+            'section' => $section
+        ]);
+    }
 }

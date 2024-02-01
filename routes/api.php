@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::get('user/doctor',[UserController::class,'indexDoctor']);
 
         Route::post('section/create',[SectionController::class,'createSection']);
+        Route::get('section/get',[SectionController::class,'indexSection']);
 
     });
 });
