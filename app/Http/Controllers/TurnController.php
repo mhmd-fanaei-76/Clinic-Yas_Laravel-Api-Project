@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TurnCreateRequest;
 use App\Http\Requests\UpdateTurnRequest;
+use App\Http\Resources\ShowMyTurnResurce;
 use App\Http\Resources\ShowTurnsResource;
 use App\Jobs\RemoveOldTurns;
 use App\Models\Time;
@@ -51,11 +52,6 @@ class TurnController extends Controller
 
     public function createTurn(TurnCreateRequest $request)
     {
-        if(!auth()->user()->can('turn.create')){
-            return response()->json([
-                'message' => 'Access Denied'
-            ]);
-        }
         $patient_id = auth()->user()->id;
         $date = date('Y-m-d H:i:s');
         $data = $request->validated();
@@ -65,5 +61,12 @@ class TurnController extends Controller
         return response()->json([
             'message' => 'Your Turn Is Pending To Confirmation'
         ]);
+    }
+
+    public function indexMyTurn(Request $request)
+    {
+        $patient_id = auth()->user()->id;
+        $turn = Turn::query()->where('patient_id', $patient_id)->get();
+        return ShowMyTurnResurce::collection($turn);
     }
 }
